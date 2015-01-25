@@ -279,8 +279,14 @@
        */
       var previousEsc = false;
 
+      /**
+       * Keep track of layout values, to restore after help menu goes away
+       */
+      var previousTop, previousScrollTop;
+
       function toggleCheatSheet() {
         scope.helpVisible = !scope.helpVisible;
+        var body = $document.find('body');
 
         // Bind to esc to remove the cheat sheet.  Ideally, this would be done
         // as a directive in the template, but that would create a nasty
@@ -293,6 +299,11 @@
           // description of the hotkey on the cheat sheet so that it shows up.
           // without it, no entry for esc will ever show up (#22)
           _add('esc', previousEsc.description, toggleCheatSheet, null, ['INPUT', 'SELECT', 'TEXTAREA']);
+
+          previousTop = body.css('top');
+          if (previousTop === 'auto') previousTop = '';
+          previousScrollTop = body[0].scrollTop;
+          body.css('top', -previousScrollTop + 'px').addClass('cfp-hotkeys-noscroll');
         } else {
           _del('esc');
 
@@ -300,6 +311,9 @@
           if (previousEsc !== false) {
             _add(previousEsc);
           }
+
+          body.css('top', previousTop).removeClass('cfp-hotkeys-noscroll');
+          body[0].scrollTop = previousScrollTop;
         }
       }
 
