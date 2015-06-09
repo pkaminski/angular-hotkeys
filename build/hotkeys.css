@@ -124,7 +124,11 @@ td.cfp-hotkeys-text:last-child {
   height: 100%;
 }
 
-.cfp-hotkeys-scrollbar {
+.cfp-hotkeys-x-scrollbar {
+  overflow-x: scroll;
+}
+
+.cfp-hotkeys-y-scrollbar {
   overflow-y: scroll;
 }
 
