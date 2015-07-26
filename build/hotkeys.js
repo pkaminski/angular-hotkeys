@@ -107,7 +107,10 @@
           up        : '↑',
           down      : '↓',
           'return'  : '↩',
-          backspace : '⌫'
+          backspace : '⌫',
+          f1: 'F1', f2: 'F2', f3: 'F3', f4: 'F4', f5: 'F5', f6: 'F6', f7: 'F7', f8: 'F8', f9: 'F9',
+          f10: 'F10', f11: 'F11', f12: 'F12', f13: 'F13', f14: 'F14', f15: 'F15', f16: 'F16',
+          f17: 'F17', f18: 'F18', f19: 'F19'
         };
         combo = combo.split('+');
 
@@ -471,7 +474,14 @@
         }
 
         var hotkey = new Hotkey(combo, description, callback, action, allowIn, persistent);
-        scope.hotkeys.push(hotkey);
+        if (persistent) {
+          scope.hotkeys.push(hotkey);
+        } else {
+          for (var j = 0; j < scope.hotkeys.length; j++) {
+            if (scope.hotkeys[j].persistent) break;
+          }
+          scope.hotkeys.splice(j, 0, hotkey);
+        }
         divideColumns();
         return hotkey;
       }
