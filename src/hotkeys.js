@@ -327,8 +327,8 @@
        */
       var previousTop, previousScrollTop;
 
-      function toggleCheatSheet() {
-        scope.helpVisible = !scope.helpVisible;
+      function toggleCheatSheet(enable) {
+        scope.helpVisible = (enable === true || enable === false) ? enable : !scope.helpVisible;
         var body = $document.find('body');
 
         // Bind to esc to remove the cheat sheet.  Ideally, this would be done
@@ -643,6 +643,7 @@
         bindTo                : bindTo,
         template              : this.template,
         toggleCheatSheet      : toggleCheatSheet,
+        isCheatSheetVisible   : function() {return scope.helpVisible;},
         includeCheatSheet     : this.includeCheatSheet,
         cheatSheetHotkey      : this.cheatSheetHotkey,
         cheatSheetDescription : this.cheatSheetDescription,
