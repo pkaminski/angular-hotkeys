@@ -538,6 +538,10 @@
         return false;
       }
 
+      function _getAll() {
+        return scope.hotkeys;
+      }
+
       function divideColumns() {
         var visibleHotkeys = [];
         var hotkey;
@@ -635,6 +639,7 @@
         add                   : _add,
         del                   : _del,
         get                   : _get,
+        getAll                : _getAll,
         bindTo                : bindTo,
         template              : this.template,
         toggleCheatSheet      : toggleCheatSheet,
